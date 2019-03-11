@@ -1,0 +1,394 @@
+@import url('https://fonts.googleapis.com/css?family=Bitter');
+
+* {
+	font-family: 'Bitter';
+	font-size: 15px;
+}
+
+
+body {
+	background-color: rgb(255, 255, 255) !important;
+	overflow-x : hidden;
+}
+
+.cadre{
+	text-align:center;
+	/*background-color: rgba(0, 0, 0, 0.082);	!* Couleur de fond *!*/
+	/*border-style:solid ; 		!* Bordure double *!*/
+	/*border-width : 1px;			!* Epaisseur bordure *!*/
+	/*border-color:rgba(0, 0, 0, 0.082);		!* Couleur de la bordure *!*/
+}
+
+#styleImage {
+	width : 25%;
+	margin-top: 5%;
+	margin-left: 38%;
+}
+
+/* id pour écart haut de page */
+.hautPage {
+	margin-top:50px;
+}
+
+.textePresentation {
+	margin-top:30px;
+	margin-left:50px;
+	margin-right:50px;
+}
+
+#miseEnValeur {
+	font-size: 115%;
+	font-style : oblique;
+	color : #038343;
+}
+
+/* taille titre rubriques menu */
+.liens {
+	font-size: 110%;
+}
+
+/* Taille nom du site menu */
+.nomSite {
+	font-size: 150%;
+}
+
+.titrePartie {
+	color : #037483;
+	padding-top: 1%;
+	padding-bottom: 1%;
+}
+
+/* position texte connexion */
+#posTitreConnexion {
+	margin : 3%;
+}
+
+.posTitreInscrire {
+	margin : 3%;
+}
+
+/* Zones textes input  */
+.zoneTxt {
+	height: 40px !important;
+
+	border-radius : 3px !important;
+	/*border-color : #038343 !important;*/
+	/*border:none !important;*/
+}
+
+#zoneMail {
+	width: 250px;
+	height: 40px;
+	border-radius : 3px;
+	border-color : #038343; 
+	border:none;
+}
+
+/* zone recherche */ 
+.positionZone {
+	margin-top : 2%!important;
+	margin-right : 10%!important;
+	margin-left: 10%!important;
+}
+
+/* position des zonnes de texte pour la connexion : adresse mail et mdp */
+.positionZoneConnexion {
+	margin-top : 0;
+	margin-right : 5%;
+	margin-left: 5%;
+}
+
+/* fleche changer départ / arrivée */
+#doubleFleche {
+	font-size: 3em;
+    vertical-align: center;
+}
+
+/* bouton */
+.bouton {
+	width : 200px;
+	height: 40px;
+	border-radius:12px;
+	background: #038343;
+	border:none;
+	color:#fff;
+}
+
+.positionBtn {
+	margin : 3%;
+}
+
+.bouton:hover {
+	background-color : #056133;
+}
+
+/* position du bouton de connexion */
+#postionBtnConnexion {
+    margin : 5%;
+}
+
+/* position du bouton d'inscription */
+#positionBtnInscrire {
+	margin : 5%;
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+	font-style : oblique !important;
+}
+
+/* taille du nom des villes dans la liste d'affichage */
+#villeTrajet {
+	font-size: 160%;
+}
+
+
+#styleLogoIUT {
+    width : 80px;
+}
+
+#styleLogoUT1 {
+    width : 50px;
+}
+
+textarea {
+	resize:none; /* empêche la redimension */ 
+}
+
+.positionContact {
+	margin: 10px;
+}
+
+.mail {
+	width: 300px;
+	height: 20px;
+	text-align: center;
+}
+
+
+.footer {
+	position: absolute;
+    bottom: 0;
+    width: 100%;
+	height: 60px;
+	margin : -100px auto 0;
+}
+
+.bouton_switch {
+	margin-top: 2%;
+	width : 75px ;
+	height: 40px;
+	border-radius:12px;
+	background: #038343;
+	border:none;
+	color:#fff;
+}
+
+.bouton_switch:hover {
+	background-color : #056133;
+}
+
+.profilText {
+	text-align: center;
+	border: none;
+	width: 100%;
+}
+
+.avatar {
+	width: 50%;
+	padding:2%;
+}
+/**Début css Page profil */
+.positionProfil{
+	text-align:center;
+	/* margin-left:100px;		/* espace entre le bord de l'écran (sur les côtés) et la page */
+}
+
+.positionTrajet{
+	text-align:center;
+	/* margin-right:100px;		/* espace entre le bord de l'écran (sur les côtés) et la page */
+}
+
+.unTrajet{
+	padding-bottom: 10px;	/* espace entre le haut du cadre d'un trajet et le texte */
+}
+
+.info{
+	color : #037483;	/* Couleur du texte : bleu */
+	font-size:120%;		/* Taille plus grande */
+}
+
+.infoPetit{
+	color : #037483;	/* Couleur du texte : bleu */
+	font-size:110%;		/* Taille plus grande, mais pas autant qu"une grande info */
+}
+
+
+.titreCentre {
+	text-align:center;
+}
+
+
+.aligneGauche {			/* Aligner un texte à gauche */
+	text-align : left ;
+}
+
+.aligneDroite {			/* Aligner un texte à droite */
+	text-align : right ;
+}
+
+.btnModif {
+	background: #038343; /* fond vert */
+}
+
+.btnSupp {
+	background: #037483; /* fond bleu */
+}
+
+.iconUser {
+	vertical-align : bottom ; /* icone du profil aligné en haut */
+}
+.aligneBasCadre{	/* Pour espacer un cadre */
+	padding-top: 50px;
+	margin-top:50px;
+
+}
+.aligneBas {		/* Pour espacer les bordures d'un cadre et le texte */
+	margin-top:50px;
+	text-align : left ;
+}
+
+.aligneCadreDroite {	/* Pour espacer un cadre à droite */
+	margin-right : 10px;
+}
+
+.aligneVraimentBas {	/* Pour espacer un cadre en haut*/
+	margin-top:162px;
+}
+
+/**Fin css Page profil */
+
+details summary {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #295376;
+    padding: 5px 15px;
+}
+
+summary {
+	outline:0;
+	float:left;
+	display:inline-block;
+}
+
+.invalid {
+	border: solid;
+	border-color: #ff0006!important;
+}
+
+.invalid-text {
+	color: #ff0006;
+}
+
+
+.profilText {
+	text-align: center;
+	border: none;
+	width: 80%;
+	margin-left: 10%;
+	margin-right:10% ;
+	border-radius: 6px;
+}
+
+.avatar {
+	width:60%;
+	padding:1%;
+	margin-top: 20px;
+}
+
+.voiture {
+	width: 80%;
+	padding:1%;
+}
+
+.bouton_profil {
+	width: 100%;
+	height: 50px;
+}
+
+
+.afficheVille {
+	font-size: 130%;
+	color: #037483;
+}
+.afficheVilleArr {
+	font-size: 125%;
+	color: #038343;
+}
+
+
+/* Style tab links */
+.tablink {
+	background-color: #555;
+	color: white;
+	float: left;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: 14px 16px;
+	font-size: 17px;
+	width: 25%;
+}
+
+.tablink:hover {
+	background-color: #777;
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent {
+	display: none;
+	padding: 100px 20px;
+	height: 100%;
+}
+
+table.tableReservation {
+	border: none;
+	margin: 2% 10% 1% 10%;
+}
+
+table.tableReservation td {
+	padding: 2% 1%;
+}
+
+.ligneReservation {
+	border: none!important;
+	width : 20%;
+}
+/*proposer*/
+.sousTitre {
+	color : #037483;
+	padding-top: 1%;
+	padding-bottom: 1%;
+	margin-right: 33%;
+}
+
+.aligneDebut {
+	margin-right: 15%;
+}
+
+#dateDep {
+	width: 18.5em!important;
+}
+
+#etape1 {
+	width : 16.2em!important;
+}
+
+#etape2 {
+	width: 16.2em!important;
+}
+
+#btnSubmit {
+	margin-top: 3%;
+	margin-bottom: 5%;
+}
+
