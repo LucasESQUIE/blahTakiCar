@@ -93,11 +93,62 @@ function setState($pdo, $idTrajet) {
 }
 
 /**
- * Ajoute un nouveau trajet dans la bd
- * @param $pdo object connexion a la bd
+ * @param $pdo
+ * @param $idUser
+ * @return mixed
  */
-function createTrajet($pdo) {
+function getImmaById($pdo, $idUser) {
+    try{
+        $sql = "SELECT immaVoiture FROM utilisateur WHERE mailUtilisateur = ?";
+        $requete = $pdo->prepare($sql);
+        $requete->execute([$idUser]);
 
+        $result = $requete->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }catch (PDOException $e) {
+        $e->getMessage();
+    }
+}
+
+/**
+ * @param $pdo
+ * @param $idConducteur
+ * @param $villeDep
+ * @param $dateDep
+ * @param $heureDep
+ * @param $villeArr
+ * @param $villeEtape
+ * @param $nbPlaces
+ * @param $prix
+ * @param $commentaires
+ * @param $immatriculation
+ * @return bool
+ */
+function createTrajet($pdo, $idConducteur, $villeDep, $dateDep, $heureDep, $villeArr,
+                      $villeEtape, $nbPlaces, $prix, $commentaires, $immatriculation) {
+    try {
+        $sql = "INSERT INTO trajet SET 
+                                   villeDep = ?,
+                                   villeArr = ?,
+                                   villeEtape = ?,
+                                   heureDep = ?,
+                                   dateDep = ?,
+                                   nbPassagers = ?,
+                                   prix = ?,
+                                   immaVoiture = ?,
+                                   idConducteur = ?,
+                                   plein = 0,
+                                   commentaires = ?";
+        $requete = $pdo->prepare($sql);
+        if($requete->execute([$villeDep, $villeArr, $villeEtape, $heureDep,
+            $dateDep, $nbPlaces, $prix, $immatriculation, $idConducteur, $commentaires])) {
+            return true;
+        }
+        return false;
+
+    }catch(PDOException $e) {
+        $e->getMessage();
+    }
 }
 
 
@@ -130,4 +181,13 @@ function reservation($pdo, $idTrajet, $nomPassager, $nbPlaces) {
     }
 }
 
+function formatageDate($date) {
+    $dateFormat= explode('/',$date);
+    return $dateFormat[2].'-'.$dateFormat[1].'-'.$dateFormat[0];
+}
 
+function testDate($date) {
+    $dateInt= explode('-',$date);
+    $dateTrajet = mktime(0,0,0,$dateInt[1],$dateInt[2],$dateInt[0],-1);
+    return $dateTrajet;
+}
