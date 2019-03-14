@@ -1,6 +1,12 @@
 <?php session_start();
 
+if(!isset($_SESSION['id'])) {
+    header("Location: ../index.php");
+}
 
+if(isset($_SESSION['id']) && isset($_SESSION['role']) && $_SESSION['role'] != 'admin') {
+    header("Location: ../index.php");
+}
 
 require_once "adminController.php";
 

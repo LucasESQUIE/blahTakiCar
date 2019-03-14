@@ -10,7 +10,6 @@ require_once "../utilities/input.php";
  * @return bool true si la création a bien été effectuée, false sinon
  */
 function createTable($pdo, $nomTable, $typeTable) {
-    defaultAction($pdo);
     try {
         $sql = "CREATE TABLE IF NOT EXISTS $nomTable LIKE $typeTable";
         $requete = $pdo->prepare($sql);

@@ -15,6 +15,12 @@ if($action == 'defaultAction' || empty($action)) {
 
 // TODO verification que le parametre est correct => sinon crash site
 
+//connexion admin
+if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
+    header("Location: admin/adminView.php");
+}
+
+
 //Gestion des pages concernant les utilisateurs
 if($action == 'connexion') {
     header("Location: users/userViewConnexion.php");
