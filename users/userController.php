@@ -44,13 +44,17 @@ function connexion($pdo) {
     }else{
         $messageErreur = false;
     }
-    if(isset($validPassword) && $user->role == 1) {
-            header("Location: ../admin/adminView.php");
-    }else if(isset($validPassword)) {
-            $_SESSION['id'] = $login;
-            $_SESSION['idSession'] = session_id();
+    if(isset($validPassword)) {
+        $_SESSION['id'] = $login;
+        $_SESSION['idSession'] = session_id();
+
+        if($user->role == 1) {
+            $_SESSION['role'] = 'admin';
+        }else{
+            $_SESSION['role'] = 'utilisateur';
             header("Location: ../index.php");
-    }else{
+        }
+    }else {
         $messageErreur = false;
     }
 }
