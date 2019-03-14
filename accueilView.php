@@ -60,7 +60,6 @@ require_once "utilities/input.php";
             </p>
         </div>
     </div>
-
     <!-- Partie rechercher -->
     <div class="row">
         <div class="col-lg-12 cadre">

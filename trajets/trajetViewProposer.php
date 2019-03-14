@@ -1,5 +1,9 @@
 <?php session_start();
 
+if(!isset($_SESSION['id'])) {
+    header("Location: ../index.php?&action=connexion");
+}
+
 require_once "../utilities/header.php"; ?>
 <script>
     $(function () {

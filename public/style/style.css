@@ -240,10 +240,6 @@ textarea {
 	background: #038343; /* fond vert */
 }
 
-.btnSupp {
-	background: #037483; /* fond bleu */
-}
-
 .iconUser {
 	vertical-align : bottom ; /* icone du profil aligné en haut */
 }
@@ -392,3 +388,39 @@ table.tableReservation td {
 	margin-bottom: 5%;
 }
 
+.espaceInline {
+	margin-right: 3%;
+}
+
+
+.boutonAdmin {
+	width : 100px;
+	height: 35px;
+	border-radius:6px;
+	background: #038343;
+	border:none;
+	color:#fff;
+	margin-left: 5%;
+}
+
+.boutonAdmin:hover {
+	background-color : #056133;
+}
+
+.boutonSuppr {
+	width : 100px;
+	height: 35px;
+	border-radius:6px;
+	background: #ff0006;
+	border:none;
+	color:#fff;
+	margin-left: 5%;
+}
+
+#ligneSep{
+	margin-top: 5%;
+}
+
+.boutonSuppr:hover{
+	background-color: #AA1D1D;
+}
