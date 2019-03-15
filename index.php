@@ -67,6 +67,11 @@ if($action == 'dConfirme') {
     header("Location: users/userViewConnexion.php");
 }
 
+if($action == 'estPropose') {
+    setcookie('estPropose', 1, time()+1);
+    header("Location: accueilView.php");
+}
+
 
 //Gestion des pages concernant les trajets
 if($action == 'rechercher') {

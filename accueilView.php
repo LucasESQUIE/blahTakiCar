@@ -170,6 +170,12 @@ if(isset($_COOKIE['dejaRes'])) {
     require_once 'utilities/windowModal.php';
 }
 
+if(isset($_COOKIE['estPropose'])) {
+    $texte = "Votre trajet a bien été pris en compte !";
+    require_once 'utilities/windowModal.php';
+}
+
+
 
 ?>
 
