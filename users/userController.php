@@ -3,15 +3,8 @@
 require_once "userModel.php";
 include_once "../utilities/input.php";
 
-//$actionsUser = array('defaultAction', 'connexion', 'inscription', 'oubliMdp', 'modifMdp');
-
+//choisi la fonction à exécuter
 $action = get('action') ?: 'defaultAction';
-//foreach($actionsUser as $act) {
-//    if($action != $act) {
-//        $action = 'defaultAction';
-//    }
-//}
-
 $action(getPDO());
 
 // TODO verification que le parametre est correct => sinon crash site
@@ -44,6 +37,7 @@ function connexion($pdo) {
     }else{
         $messageErreur = false;
     }
+  
     if(isset($validPassword)) {
         $_SESSION['id'] = $login;
         $_SESSION['idSession'] = session_id();
@@ -119,8 +113,11 @@ function inscription($pdo) {
         //si toutes les données ok on insere dans la BD + envoi mail
         if(newUser($pdo, $mail, $nomUser, $prenomUser, $filiere, password_hash($password, PASSWORD_BCRYPT, array('cost'=>12)), $numTel, $clefConfirm)) {
             require_once "../utilities/mailControl.php";
-            $mailE = envoiMail($mail, 'blahtakicar@gmail.com', 'Taki Car', 'Mail de confirmation',
-                $corpsInscription);
+            require_once "../utilities/corpsMail.php";
+            $mailE = envoiMail($mail, 'blahtakicar@gmail.com', 'Blah Taki Car', 'Mail de confirmation',
+                templateMail('Mail de confirmation','Veuillez cliquer sur le bouton pour cofirmer votre compte
+                                sur BlahTakiCar', 'http://localhost/blahMVCv1.1/accueilView.php?&mail='
+                                .urlencode(isset($mail)).'&clefConfirm='.urlencode(isset($clefConfirm)),'Confirmer'));
             if(true != $mailE) {
                 /* TODO MSG ERR mail non envoyé */
             } else {
@@ -140,8 +137,11 @@ function oubliMdp($pdo) {
         $messageErreur = "Compte non inscrit";
     } else if(modifClefConfirm($mail, $clefConfirm)) {
         require_once "../utilities/mailControl.php";
-        $mailE = envoiMail($mail, 'blahtakicar@gmail.com', 'Taki Car', 'Oubli de mot de passe',
-            $corpsOubliMdp);
+        require_once "../utilities/corpsMail.php";
+        $mailE = envoiMail($mail, 'blahtakicar@gmail.com', 'Blah Taki Car', 'Oubli de mot de passe',
+            templateMail('Oubli de mot de passe','Veuillez cliquer sur le bouton pour modifier votre mot
+                            de passe','http://localhost/BlahMVC/users/userViewModifMdp.php?&mail=\'
+                            .urlencode(isset($mail)).\'&clefConfirm=\'.urlencode(isset($clefConfirm))','Modifier'));
         if(true != $mailE) {
             echo $mailE;
         } else {
