@@ -8,7 +8,7 @@
                 <br />
                 2018 Copyright
                 <a href="../index.php" alt="Accéder à l'accueil">BlahTakiCar</a>
-                <a href="contact.php" alt="ContactAdministration">Nous Contacter</a>
+                <a href="../contact/contact.php" alt="ContactAdministration">Nous Contacter</a>
             </div>
         </div>
     </footer>

@@ -21,8 +21,8 @@
         $mail->Password = MDP;
         $mail->SetFrom($emet, $nomEmet);
         $mail->isHTML(true);
-        $mail->Subject = $sujet;
-        $mail->Body = $contenu;
+        $mail->Subject = utf8_decode($sujet);
+        $mail->Body = utf8_decode($contenu);
         $mail->AddAddress($dest);
         if (!$mail->Send()) {
             return 'Erreur mail: ' . $mail->ErrorInfo;
