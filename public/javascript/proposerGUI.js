@@ -9,15 +9,15 @@ inputVilleDep.addEventListener('blur', (e) => {
 });
 
 //controle de la saisie de la date de départ
-let inputDate = document.getElementById('dateDep');
-inputDate.addEventListener('blur', (e) => {
-    console.log(inputDate.value);
-   if(inputDate.value !== "") {
-       inputDate.classList.remove('invalid');
-   }else{
-       inputDate.classList.add('invalid');
-   }
-});
+// let inputDate = document.getElementById('dateDep');
+// inputDate.addEventListener('blur', (e) => {
+//     console.log(inputDate.value);
+//    if(inputDate.value !== "") {
+//        inputDate.classList.remove('invalid');
+//    }else{
+//        inputDate.classList.add('invalid');
+//    }
+// });
 
 
 //controle de la saisie de l'heure de départ
