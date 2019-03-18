@@ -10,7 +10,7 @@ require_once "../utilities/dataSource.php";
  */
 function getTrajets($pdo) {
     try {
-        $sql = "SELECT * FROM trajet WHERE dateDep >= SYSDATE() AND plein != 1";
+        $sql = "SELECT * FROM trajet WHERE dateDep >= CURRENT_DATE() AND plein != 1";
         $requete = $pdo->prepare($sql);
         $requete->execute();
 

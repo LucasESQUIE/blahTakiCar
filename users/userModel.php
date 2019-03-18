@@ -11,7 +11,7 @@ require_once "../utilities/dataSource.php";
  */
 function verifInfoConnexion($pdo, $mail) {
     try{
-        $sql = "SELECT mailUtilisateur, role, mdp FROM utilisateur WHERE mailUtilisateur = :mail ";
+        $sql = "SELECT mailUtilisateur, role, mdp, confirme FROM utilisateur WHERE mailUtilisateur = :mail";
         $requete = $pdo->prepare($sql);
         $requete->execute(['mail'=>$mail]);
 
@@ -58,6 +58,19 @@ function newUser($pdo, $userMail, $userName, $userSurname, $userFiliere, $passwo
     }
 }
 
+function getClefConfirm($pdo, $mail) {
+    try {
+        $sql = "SELECT cleconfirm FROM utilisateur WHERE mailUtilisateur = ?";
+        $requete = $pdo->prepare($sql);
+        $requete->execute(array($mail));
+        $result = $requete->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    } catch (PDOException $e) {
+        $e->getMessage();
+    }
+}
+
 /**
  * Vérifie si l'utilisateur existe déjà dans la BD
  * @param $mailUser string id de l'utilisateur
@@ -86,7 +99,6 @@ function verificationMail($userMail, $clefConfirm) {
         $requete = $db->prepare("SELECT * FROM utilisateur WHERE mailUtilisateur = ? AND cleconfirm = ?");
         $requete->execute(array($userMail, $clefConfirm));
         $mailExist = $requete->rowCount();
-
         if ($mailExist == 1) {
             $user = $requete->fetch();
             if ($user['confirme'] == 0) {
@@ -98,9 +110,7 @@ function verificationMail($userMail, $clefConfirm) {
                 echo("<script type='text/javascript'>window.location='../index.php?&action=dConfirme';</script>");
             }
         } else {
-            var_dump($mailExist);
             $messageErreur = "Mail non existant !";
-            echo 'nok';
             //echo("<script type='text/javascript'>window.location='../index.php';</script>");
         }
     } catch (PDOException $e) {
@@ -111,7 +121,7 @@ function verificationMail($userMail, $clefConfirm) {
 function verifCompte($mailUser) {
     $db = getPDO();
     try {
-        $requete= $db->prepare("SELECT * FROM utilisateur WHERE mailUtilisateur = :mailUser AND confirme = 1");
+        $requete= $db->prepare("SELECT * FROM utilisateur WHERE mailUtilisateur = :mailUser");
         $requete->execute(array($mailUser));
         if ($result = $requete->fetch(PDO::FETCH_ASSOC)) {
             $requete-> closeCursor();
@@ -219,6 +229,4 @@ function UpdatePhotoVoiture($chemin, $id) {
         $e->getMessage();
     }
 }
-
-
 ?>

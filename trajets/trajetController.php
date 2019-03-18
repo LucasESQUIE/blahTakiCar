@@ -17,12 +17,12 @@ $action(getPDO());
  * @return null si on est sur aucune des pages nécssitant une defaultAction
  */
 function defaultAction($pdo) {
-    if($_SERVER['PHP_SELF'] == "/blahMVCv1.1/trajets/trajetViewRecherche.php") {
+    if($_SERVER['PHP_SELF'] == "/blahTakiCar-master/trajets/trajetViewRecherche.php") {
         global $trajets;
         $trajets = getTrajets($pdo);
     }
 
-    if($_SERVER['PHP_SELF'] == "/blahMVCv1.1/trajets/trajetViewReservation.php"){
+    if($_SERVER['PHP_SELF'] == "/blahTakiCar-master/trajets/trajetViewReservation.php"){
         global $result;
         $idTrajet = get('id');
         $result = getTrajetById($pdo, $idTrajet);

@@ -72,6 +72,12 @@ if($action == 'estPropose') {
     header("Location: accueilView.php");
 }
 
+if($action == 'support') {
+    setcookie('support', 1, time()+1);
+    header("Location: accueilView.php");
+}
+
+
 
 //Gestion des pages concernant les trajets
 if($action == 'rechercher') {

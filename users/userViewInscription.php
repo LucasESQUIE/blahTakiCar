@@ -13,6 +13,11 @@ require_once "userController.php";
 
 require_once '../utilities/header.php';
 ?>
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
+    </script>
 <!-- centre -->
 <div class="container hautPage">
     <div class="row cadre">
@@ -27,7 +32,8 @@ require_once '../utilities/header.php';
                         <div class="invalid-text">Email Invalide</div>
                         <input type="email" class="form-control  invalid" name="mail" placeholder="Adresse Mail">
                     <?php }else { ?>
-                        <input type="email" class="form-control zoneTxt" name="mail" placeholder="Adresse Mail" value="<?php echo post('mail'); ?>">
+                        <input type="email" class="form-control zoneTxt" data-container="body" data-toggle="popover" data-trigger="focus"
+                               data-placement="top" data-content="prenom.nom@iut-rodez.fr" name="mail" placeholder="Adresse Mail" value="<?php echo post('mail'); ?>">
                     <?php } ?>
                 </div>
 

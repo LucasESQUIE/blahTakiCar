@@ -5,8 +5,8 @@ function templateMail($titre, $contenu, $lien, $txtBouton) {
     $button ='<td style="padding:0 0 20px;">
             <table width="134" align="center" style="margin:0 auto;" cellpadding="0" cellspacing="0">
                 <tr>
-                    <td data-bgcolor="bg-button" data-size="size button" data-min="10" data-max="16" class="btn" align="center" style="font:12px/14px Arial, Helvetica, sans-serif; color:#f8f9fb; text-transform:uppercase; mso-padding-alt:12px 10px 10px; border-radius:2px;" bgcolor="#7bb84f">
-                        <a target="_blank" style="text-decoration:none; color:#f8f9fb; display:block; padding:12px 10px 10px;" href="'.$lien.'">'.$txtBouton.'</a>
+                    <td data-bgcolor="bg-button" data-size="size button" data-min="10" data-max="16" class="btn" align="center" style="font:12px/14px; color:#f8f9fb; text-transform:uppercase; mso-padding-alt:12px 10px 10px; border-radius:2px;" bgcolor="#7bb84f">
+                        <a target="_blank" style="text-decoration:none; color:#f8f9fb; display:block; padding:12px 10px 10px;" href="'.$lien.'"><strong>'.$txtBouton.'</strong></a>
                     </td>
                 </tr>
             </table>
@@ -109,6 +109,7 @@ function templateMail($titre, $contenu, $lien, $txtBouton) {
 			</tr>
 			<tr>
 				<td class="wrapper" style="padding:0 10px;">
+				
 										<!-- module 2 -->
 					<table data-module="module-2" data-thumb="thumbnails/02.png" width="100%" cellpadding="0" cellspacing="0">
 						<tr>

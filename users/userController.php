@@ -18,38 +18,49 @@ function defaultAction($pdo) {
 }
 
 
+
 function connexion($pdo) {
     global $messageErreur;
-    $login = htmlspecialchars(post('mail'));
+    $messageErreur = array('mailValide' => true,
+                           'compteValide' => true,
+                           'compteConfirme' => true);
+
+    $formatMail = '/^[a-zA-Z0-9._%+-]+@iut-rodez\.fr$/';
+
+    $mail = htmlspecialchars(post('mail'));
     $password = htmlspecialchars(post('mdp'));
+    $clefConfirm = getClefConfirm($pdo,$mail)['cleconfirm'];
 
     // verification format de l'email
-    if(!filter_var($login, FILTER_VALIDATE_EMAIL)) {
-        $messageErreur = "Email invalide";
-    }
+    if(!preg_match( $formatMail, $mail)) {
+        $messageErreur['mailValide'] = false;
+    } else {
+        $requete = verifInfoConnexion($pdo, $mail);
+        $user = $requete->fetch(PDO::FETCH_OBJ);
 
-    $requete = verifInfoConnexion($pdo, $login);
-    $user = $requete->fetch(PDO::FETCH_OBJ);
-
-    if($user) {
-        $mdp = $user->mdp;
-        $validPassword = password_verify($password, $mdp);
-    }else{
-        $messageErreur = false;
-    }
-  
-    if(isset($validPassword)) {
-        $_SESSION['id'] = $login;
-        $_SESSION['idSession'] = session_id();
-
-        if($user->role == 1) {
-            $_SESSION['role'] = 'admin';
-        }else{
-            $_SESSION['role'] = 'utilisateur';
-            header("Location: ../index.php");
+        if ($user) {
+            $mdp = $user->mdp;
+            $validPassword = password_verify($password, $mdp);
+            if ($user->confirme == 1) {
+                $_SESSION['id'] = $mail;
+                $_SESSION['idSession'] = session_id();
+                if ($user->role == 1) {
+                    $_SESSION['role'] = 'admin';
+                } else {
+                    $_SESSION['role'] = 'utilisateur';
+                    header("Location: ../index.php");
+                }
+            } else {
+                $messageErreur['compteConfirme'] = false;
+                require_once "../utilities/mailControl.php";
+                envoiMail($mail, 'blahtakicar@gmail.com', 'Blah Taki Car', 'Mail de confirmation',
+                    templateMail('Mail de confirmation','Veuillez cliquer sur le bouton pour confirmer votre compte
+                                sur BlahTakiCar', 'http://localhost/blahTakiCar-master/users/userViewConnexion.php?&mail='
+                        .urlencode($mail).'&clefConfirm='.urlencode($clefConfirm),'Confirmer'));
+            }
+        } else {
+            $messageErreur['compteValide'] = false;
         }
-    }else {
-        $messageErreur = false;
     }
 }
 
@@ -113,11 +124,10 @@ function inscription($pdo) {
         //si toutes les données ok on insere dans la BD + envoi mail
         if(newUser($pdo, $mail, $nomUser, $prenomUser, $filiere, password_hash($password, PASSWORD_BCRYPT, array('cost'=>12)), $numTel, $clefConfirm)) {
             require_once "../utilities/mailControl.php";
-            require_once "../utilities/corpsMail.php";
             $mailE = envoiMail($mail, 'blahtakicar@gmail.com', 'Blah Taki Car', 'Mail de confirmation',
-                templateMail('Mail de confirmation','Veuillez cliquer sur le bouton pour cofirmer votre compte
-                                sur BlahTakiCar', 'http://localhost/blahMVCv1.1/accueilView.php?&mail='
-                                .urlencode(isset($mail)).'&clefConfirm='.urlencode(isset($clefConfirm)),'Confirmer'));
+                templateMail('Mail de confirmation','Veuillez cliquer sur le bouton pour confirmer votre compte
+                                sur BlahTakiCar', 'http://localhost/blahTakiCar-master/users/userViewConnexion.php?&mail='
+                                .urlencode($mail).'&clefConfirm='.urlencode($clefConfirm),'Confirmer'));
             if(true != $mailE) {
                 /* TODO MSG ERR mail non envoyé */
             } else {
@@ -140,7 +150,7 @@ function oubliMdp($pdo) {
         require_once "../utilities/corpsMail.php";
         $mailE = envoiMail($mail, 'blahtakicar@gmail.com', 'Blah Taki Car', 'Oubli de mot de passe',
             templateMail('Oubli de mot de passe','Veuillez cliquer sur le bouton pour modifier votre mot
-                            de passe','http://localhost/BlahMVC/users/userViewModifMdp.php?&mail=\'
+                            de passe','http://localhost/blahTakiCar-master/users/userViewModifMdp.php?&mail=\'
                             .urlencode(isset($mail)).\'&clefConfirm=\'.urlencode(isset($clefConfirm))','Modifier'));
         if(true != $mailE) {
             echo $mailE;

@@ -82,7 +82,7 @@ require "trajetController.php";
                         <tr>
                             <td colspan="7">
                                 <h4>Aucun trajet disponible</h4>
-                                <p>Peut-être voulez-vous en <a href="#">proposer</a> un ?</p>
+                                <p>Peut-être voulez-vous en <a href="trajetViewProposer.php">proposer</a> un ?</p>
                             </td>
                         </tr>
                     <?php } ?>
@@ -103,12 +103,5 @@ require "trajetController.php";
         </div>
     </div>
     <script type="text/javascript" src="../public/javascript/interface.js"></script>
-
-<?php
-
-
-
-
-?>
 
 <?php require_once '../utilities/footer2.php'; ?>

@@ -27,6 +27,12 @@ require_once '../utilities/header.php';
                         <br/>
                         <input type="password" class="form-control zoneTxt" name="confPassword" placeholder="Confirmer le mot de passe">
                         <br/>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <small id="mdp" class="form-text text-muted">Le mot de passe doit faire 8 caractères de long, contenir au moins
+                                    une minuscule, une majuscule et un chiffre.</small>
+                            </div>
+                        </div>
                         <!-- bouton ok -->
                         <button type='submit' class="bouton" id="postionBtnConnexion">Modifier</button>
                         <br/>

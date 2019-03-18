@@ -131,14 +131,13 @@ require_once "utilities/input.php";
                 <br />
                 2018 Copyright
                 <a href="index.php" alt="Accéder à l'accueil">BlahTakiCar</a>
-                <a href="#" alt="ContactAdministration">Nous Contacter</a>
+                <a href="contact/contact.php" alt="ContactAdministration">Nous Contacter</a>
             </div>
         </div>
     </footer>
 </div>
 
 <?php
-
 //si l'utilisateur vient de se déconnecter on affiche une fenetre modale pour l'informer
 if(isset($_COOKIE['deco'])) {
     $texte = 'Vous avez bien été déconnecté !';
@@ -146,7 +145,7 @@ if(isset($_COOKIE['deco'])) {
 }
 //informe l'utilisateur du succès de son inscription
 if(isset($_COOKIE['inscrit'])) {
-    $texte = 'Vous avez bien été inscrit !';
+    $texte = 'Un mail vous a été evoyé pour modifier votre mot de passe !';
     require_once 'utilities/windowModal.php';
 }
 
@@ -175,8 +174,10 @@ if(isset($_COOKIE['estPropose'])) {
     require_once 'utilities/windowModal.php';
 }
 
-
-
+if(isset($_COOKIE['support'])) {
+    $texte = "Votre demande a bien été envoyé !";
+    require_once 'utilities/windowModal.php';
+}
 ?>
 
 </body>

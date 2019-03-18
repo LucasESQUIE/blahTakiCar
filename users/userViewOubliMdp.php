@@ -18,13 +18,12 @@ require_once '../utilities/header.php';
                 <?php if(isset($messageErreur)) { ?>
                     <div class="alert alert-danger"><?php echo $messageErreur ?></div><br/>
                 <?php } ?>
-
                 <form action="userViewOubliMdp.php?&action=oubliMdp" method="post">
                     <div class="col-lg-12">
                         <input type="text" name="mail" id="mail" class="form-control zoneTxt" placeholder="Adresse Mail" required>
                         <br/>
                         <!-- bouton ok -->
-                        <button type='submit' class="bouton" id="postionBtnConnexion">Envoyer</button>
+                        <button type='submit' class="bouton"">Envoyer</button>
                         <br/>
                     </div>
                 </form>
