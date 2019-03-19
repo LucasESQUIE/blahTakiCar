@@ -19,10 +19,20 @@ body {
 	/*border-color:rgba(0, 0, 0, 0.082);		!* Couleur de la bordure *!*/
 }
 
-#styleImage {
-	width : 25%;
-	margin-top: 5%;
-	margin-left: 38%;
+@media screen and (max-width: 799px) {
+	#styleImage {
+		width : 25%;
+		margin-top: 10%;
+		margin-left: 38%;
+	}
+}
+
+@media screen and (min-width: 800px) {
+	#styleImage {
+		width : 64%;
+		margin-top: 5%;
+		margin-left: 18%;
+	}
 }
 
 /* id pour écart haut de page */
@@ -89,6 +99,7 @@ body {
 	margin-top : 2%!important;
 	margin-right : 10%!important;
 	margin-left: 10%!important;
+	vertical-align: middle!important; /* RESPONSIVE */
 }
 
 /* position des zonnes de texte pour la connexion : adresse mail et mdp */
@@ -364,23 +375,26 @@ table.tableReservation td {
 	color : #037483;
 	padding-top: 1%;
 	padding-bottom: 1%;
-	margin-right: 33%;
+	text-align: left; /* RESPONSIVE */
+	margin-left: 30%;
 }
 
-.aligneDebut {
+/*.aligneDebut {
 	margin-right: 15%;
-}
+}*/
 
-#dateDep {
-	width: 18.5em!important;
-}
+@media screen and (min-width: 800px) {
+	#dateDep {
+		width: 18.5em!important;
+	}
 
-#etape1 {
-	width : 16.2em!important;
-}
+	#etape1 {
+		width : 16.2em!important;
+	}
 
-#etape2 {
-	width: 16.2em!important;
+	#etape2 {
+		width: 16.2em!important;
+	}
 }
 
 #btnSubmit {
