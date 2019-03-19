@@ -168,7 +168,8 @@ function modificationMdp($pdo ,$userMail, $password) {
  * @param $idUser string id de l'utilisateur
  * @return mixed un tableau contenant les informations de l'utilisateur
  */
-function recupInfoUser($pdo, $idUser) {
+function recupInfoUser($idUser) {
+    $pdo = getPDO();
     try {
         $sql = "SELECT * FROM utilisateur WHERE mailUtilisateur = :idUser";
         $requete = $pdo->prepare($sql);
@@ -193,6 +194,87 @@ function UpdateInfoProfil($id) {
     $update = $pdo->prepare($requete);
     $update->execute([ 'nom' => $_POST['nom'], 'prenom' => $_POST['prenom'], 'tel' => $_POST['tel'], 'filiere' => $_POST['filiere'], 'modele' => $_POST['modele'], 'marque' => $_POST['marque'], 'couleur' => $_POST['couleur'], 'userMail' => $id ]);
 }
+
+/**
+ * recherche des trajets en cours de l'utilisateur
+ * @param $pdo object connexion à la bd
+ */
+function getTrajetEnCours($pdo, $idConducteur) {
+    try {
+        $result = array();
+        $sql = "SELECT * FROM trajet WHERE (idConducteur = :idConducteur OR idPassagers LIKE :idPassagers) AND dateDep >= SYSDATE()";
+        $requete = $pdo->prepare($sql);
+        $requete->execute(["idConducteur"=>$idConducteur,"idPassagers"=>'%'.$idConducteur.'%']);
+        while ($row = $requete->fetch(PDO::FETCH_ASSOC)) {
+            $result[$row['idTrajet']] = array('villeDep'=>$row['villeDep'],
+                'villeArr'=>$row['villeArr'],
+                'heureDep'=>$row['heureDep'],
+                'dateDep'=>$row['dateDep'],
+                'prix'=>$row['prix'],
+                'nbPassagers'=>$row['nbPassagers'],
+                'idPassagers'=>$row['idPassagers'],
+                'idConducteur'=>$row['idConducteur'],
+                'villeEtape'=>$row['villeEtape'],
+                'commentaires'=>$row['commentaires']);
+        }
+        return $result;
+    } catch (PDOException $e) {
+        $e->getMessage();
+    }
+}
+
+/**
+ * recherche du nombre de trajets en cours de l'utilisateur
+ * @param $pdo object connexion à la bd
+ */
+function getNbTrajetEnCours($pdo, $idConducteur) {
+    try {
+        $sql = "SELECT COUNT(*) FROM trajet WHERE (idConducteur = :idConducteur OR idPassagers LIKE :idPassagers) AND dateDep >= SYSDATE()";
+        $requete = $pdo->prepare($sql);
+        $requete->execute(["idConducteur"=>$idConducteur,"idPassagers"=>'%'.$idConducteur.'%']);
+        $result = $requete->fetch();
+        return $result;
+    } catch (PDOException $e) {
+        $e->getMessage();
+    }
+}
+
+function getTrajetArchives($pdo, $idConducteur) {
+    try {
+        $result = array();
+        $sql = "SELECT * FROM trajet WHERE (idConducteur = :idConducteur OR idPassagers LIKE :idPassagers) AND dateDep <= SYSDATE()";
+        $requete = $pdo->prepare($sql);
+        $requete->execute(["idConducteur"=>$idConducteur,"idPassagers"=>'%'.$idConducteur.'%']);
+        while ($row = $requete->fetch(PDO::FETCH_ASSOC)) {
+            $result[$row['idTrajet']] = array('villeDep'=>$row['villeDep'],
+                'villeArr'=>$row['villeArr'],
+                'heureDep'=>$row['heureDep'],
+                'dateDep'=>$row['dateDep'],
+                'prix'=>$row['prix'],
+                'nbPassagers'=>$row['nbPassagers'],
+                'idPassagers'=>$row['idPassagers'],
+                'idConducteur'=>$row['idConducteur'],
+                'villeEtape'=>$row['villeEtape'],
+                'commentaires'=>$row['commentaires']);
+        }
+        return $result;
+    } catch (PDOException $e) {
+        $e->getMessage();
+    }
+}
+
+function getNbTrajetArchives($pdo, $idConducteur) {
+    try {
+        $sql = "SELECT COUNT(*) FROM trajet WHERE (idConducteur = :idConducteur OR idPassagers LIKE :idPassagers) AND dateDep <= SYSDATE()";
+        $requete = $pdo->prepare($sql);
+        $requete->execute(["idConducteur"=>$idConducteur,"idPassagers"=>'%'.$idConducteur.'%']);
+        $result = $requete->fetch();
+        return $result;
+    } catch (PDOException $e) {
+        $e->getMessage();
+    }
+}
+
 
 /**
  * Met à jour la photo de la voiture dans la base de données
@@ -228,5 +310,13 @@ function UpdatePhotoVoiture($chemin, $id) {
     } catch (PDOException $e) {
         $e->getMessage();
     }
+}
+
+function supprTrajet($idTrajet) {
+    $pdo = getPDO();
+    $sql = "DELETE FROM trajet WHERE idTrajet = :idTrajet";
+    $requete = $pdo->prepare($sql);
+    $requete->execute(array($idTrajet));
+    $result = $requete->fetch(PDO::FETCH_ASSOC);
 }
 ?>

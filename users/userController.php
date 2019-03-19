@@ -12,7 +12,16 @@ $action(getPDO());
 function defaultAction($pdo) {
     if(isset($_SESSION['id'])) {
         global $valeur;
-        $valeur = recupInfoUser($pdo, $_SESSION['id']);
+        global $valeurTrajet;
+        global $nbTrajets;
+        global $valeurTrajetArchives;
+        global $nbTrajetsArchives;
+        $valeur = recupInfoUser($_SESSION['id']);
+        $valeurTrajet = getTrajetEnCours($pdo, $_SESSION['id']);
+        $nbTrajets = getNbTrajetEnCours($pdo, $_SESSION['id']);
+        $valeurTrajetArchives = getTrajetArchives($pdo, $_SESSION['id']);
+        $nbTrajetsArchives = getNbTrajetArchives($pdo, $_SESSION['id']);
+        UpdateProfil();
     }
     return null;
 }
@@ -187,10 +196,9 @@ function UpdateProfil() {
     // Si on a bien reçu tous les champs nécessaires
     if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['tel']) && isset($_POST['filiere']) && isset($_POST['modele']) && isset($_POST['marque']) && isset($_POST['couleur'])){
         UpdateInfoProfil($_SESSION['id']);
+        modifPhotoVoiture();
+        modifPhotoProfil();
         header('Location: userViewProfil.php');
-    }else{
-        //TODO Message Erreur Formulaire
-        echo 'erreur';
     }
 }
 
@@ -219,8 +227,6 @@ function modifPhotoProfil() {
                 if ($resultat) {
                     /* Modifie le chemin de l'image en base de données */
                     UpdatePhotoProfil($chemin,$_SESSION['id']);
-                    /* Redirige l'utilisateur vers la page profil avec l'image modifiée */
-                    header('Location: userViewProfil.php');
                 } else {
                     $msg = "Erreur durant l'importation de votre photo de profil";
                 }
@@ -253,8 +259,6 @@ function modifPhotoVoiture() {
                 if ($resultat) {
                     /* Modifie le chemin de l'image en base de données */
                     UpdatePhotoVoiture($cheminVoiture,$_SESSION['id']);
-                    /* Redirige l'utilisateur vers la page profil avec l'image modifiée */
-                    header('Location: userViewProfil.php');
                 } else {
                     $msg = "Erreur durant l'importation de votre photo de profil";
                 }
@@ -267,14 +271,15 @@ function modifPhotoVoiture() {
     }
 }
 
+function clickBoutonSuppr($idTrajet) {
+    supprTrajet($idTrajet);
+    header('Location: userViewProfil.php');
+}
 
-
-
-
-
-
-
-
+/* Detecte l'activation du bouton Supprimer et retourne en parametre le trajet à supprimer */
+if (isset($_GET['suppr'])) {
+    clickBoutonSuppr(htmlspecialchars($_GET["suppr"]));
+}
 
 /*---------------- FONCTIONS UTILITAIRES POUR LES UTILISATEURS -------------- */
 
