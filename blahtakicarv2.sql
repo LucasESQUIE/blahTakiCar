@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Ven 15 Mars 2019 à 10:09
+-- Généré le :  Mar 19 Mars 2019 à 21:00
 -- Version du serveur :  5.7.11
 -- Version de PHP :  5.6.18
 
@@ -47,10 +47,11 @@ CREATE TABLE `trajet` (
 --
 
 INSERT INTO `trajet` (`idTrajet`, `villeDep`, `villeEtape`, `villeArr`, `heureDep`, `dateDep`, `nbPassagers`, `prix`, `immaVoiture`, `idConducteur`, `idPassagers`, `plein`, `commentaires`) VALUES
-(1, 'Rodez', NULL, 'Toulouse', '17h05', '2019-03-02', 9, 5, 'EL251WE', 'laura.duphil@iut-rodez.fr', 'clement.maurin@iut-rodez.fr;', 0, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut dui eu eros gravida tincidunt quis sed ante. Curabitur sem libero, eleifend sit amet feugiat mattis, elementum at lacus. '),
-(2, 'Toulouse', NULL, 'Rodez', '10h00', '2019-03-01', 8, 5, 'EL251WE', 'laura.duphil@iut-rodez.fr', 'clement.maurin@iut-rodez.fr;test@iut-rodez.fr;', 0, NULL),
+(1, 'Rodez', NULL, 'Toulouse', '17h05', '2019-03-02', 9, 5, 'EL251WE', 'laura.duphil@iut-rodez.fr', 'clement.maurin@iut-rodez.fr', 0, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut dui eu eros gravida tincidunt quis sed ante. Curabitur sem libero, eleifend sit amet feugiat mattis, elementum at lacus. '),
 (3, 'Mazamet', ';', 'Castres', '15h15', '2019-03-15', 3, 0, NULL, 'theo.gutierrez@iut-rodez.fr', NULL, 0, ''),
-(4, 'Castres', ';', 'Mazamet', '15h15', '2019-03-16', 3, 0, NULL, 'theo.gutierrez@iut-rodez.fr', NULL, 0, '');
+(4, 'Castres', ';', 'Mazamet', '15h15', '2019-03-16', 3, 0, NULL, 'theo.gutierrez@iut-rodez.fr', NULL, 0, ''),
+(5, 'Rodez', 'Onet le Chateau;', 'Mende', '12h00', '2019-03-27', 2, 10, NULL, 'clement.maurin@iut-rodez.fr', NULL, 0, 'Bonjour'),
+(6, 'Mende', ';', 'Rodez', '10h30', '2019-03-28', 2, 3, 'CV123BN', 'clement.maurin@iut-rodez.fr', 'laura.duphil@iut-rodez.fr;', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -65,7 +66,7 @@ CREATE TABLE `utilisateur` (
   `prenom` varchar(50) NOT NULL,
   `numTel` char(10) DEFAULT NULL,
   `filiere` varchar(20) NOT NULL,
-  `photoUtilisateur` varchar(60) DEFAULT NULL,
+  `photoUtilisateur` varchar(60) DEFAULT '../public/images/iconUser.png',
   `mdp` varchar(255) NOT NULL,
   `cleconfirm` varchar(255) NOT NULL,
   `confirme` tinyint(1) NOT NULL DEFAULT '0',
@@ -73,7 +74,7 @@ CREATE TABLE `utilisateur` (
   `marqueVoiture` varchar(25) DEFAULT NULL,
   `modeleVoiture` varchar(25) DEFAULT NULL,
   `couleurVoiture` varchar(25) DEFAULT NULL,
-  `photoVoiture` varchar(80) DEFAULT NULL
+  `photoVoiture` varchar(80) DEFAULT '../public/images/iconVoiture.png'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -81,7 +82,7 @@ CREATE TABLE `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`mailUtilisateur`, `role`, `nom`, `prenom`, `numTel`, `filiere`, `photoUtilisateur`, `mdp`, `cleconfirm`, `confirme`, `immaVoiture`, `marqueVoiture`, `modeleVoiture`, `couleurVoiture`, `photoVoiture`) VALUES
-('clement.maurin@iut-rodez.fr', 0, 'maurin', 'clement', '0647206097', 'informatique', NULL, 'Mdp12345', '', 1, NULL, '', '', '', ''),
+('clement.maurin@iut-rodez.fr', 0, 'maurin', 'clement', '0647206097', 'informatique', 'images/users/clement.maurin@iut-rodez.fr.png', 'Mdp12345', '', 1, NULL, 'Citroen', 'Saxo', 'Bleue', '../public/images/iconVoiture.png'),
 ('laura.duphil@iut-rodez.fr', 0, 'Duphil', 'Laura', '0686065454', 'informatique', NULL, 'Mdp12345', '', 1, 'EL251WE', '', '', '', ''),
 ('lucas.esquie-fayolle@iut-rodez.fr', 1, 'Esquié-Fayolle', 'Lucas', '0635284660', 'Informatique', NULL, '$2y$12$7ZMwDO5eOA2XgRfX7GNe7.UdlD7FK6/oRGrgV8v3uIjrHrg/a84ni', '28348779465775', 1, NULL, NULL, NULL, NULL, NULL),
 ('test@iut-rodez.fr', 0, 'Test', 'Test', '0635284660', 'Informatique', NULL, '$2y$12$yINwArNDmv.jgkhQnlUX5OarKfKZH/pKnX8nN4oNHNeGZrFqCobJW', '12393551342332', 0, NULL, NULL, NULL, NULL, NULL),
@@ -111,7 +112,7 @@ ALTER TABLE `utilisateur`
 -- AUTO_INCREMENT pour la table `trajet`
 --
 ALTER TABLE `trajet`
-  MODIFY `idTrajet` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idTrajet` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
